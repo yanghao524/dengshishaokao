@@ -52,7 +52,7 @@ cloud functions (Node.js) ─── cloud database (文档型 DB)
 
 ```
 dengshishaokao/
-├── miniprogram/                     # 小程序前端
+├──                      # 小程序前端
 │   ├── app.js/json/wxss             # 入口 + 全局配置 + 主题样式
 │   ├── pages/
 │   │   ├── index/                   # 顾客首页
@@ -106,19 +106,19 @@ git clone https://github.com/yanghao524/dengshishaokao.git
 
 | 文件 | 配置项 | 说明 |
 |------|--------|------|
-| `miniprogram/project.config.json` | `appid` | 替换为你的小程序 AppID |
-| `miniprogram/app.js` | `env` | 替换为你的云开发环境 ID |
+| `project.config.json` | `appid` | 替换为你的小程序 AppID |
+| `app.js` | `env` | 替换为你的云开发环境 ID |
 
 ### 3. 导入、构建、部署
 
-1. 打开**微信开发者工具**，导入 `miniprogram/` 目录
+1. 打开**微信开发者工具**，导入项目根目录
 2. 在开发者工具中：工具 → 构建 npm（构建 Vant WeApp）
 3. 依次右键 `cloudfunctions/` 下每个云函数目录 → 上传并部署
 4. 在开发者工具中手动调用一次 `seedData` 云函数，初始化种子数据
 
 ### 4. 添加 TabBar 图标
 
-在 `miniprogram/images/` 下放置以下图片（建议 81×81px PNG）：
+在 `images/` 下放置以下图片（建议 81×81px PNG）：
 
 ```
 tab-home.png / tab-home-active.png    # 首页
