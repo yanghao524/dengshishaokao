@@ -1,0 +1,218 @@
+/* 邓师烧烤 - 全局样式 */
+
+/* CSS 变量 */
+page {
+  --primary: #D4380D;
+  --primary-light: #FF6B3D;
+  --primary-bg: #FFF1E8;
+  --success: #0A9F4E;
+  --success-bg: #E8F8EF;
+  --warning: #FF976A;
+  --warning-bg: #FFF3EC;
+  --danger: #F5222D;
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --text-hint: #999999;
+  --bg-page: #F5F5F5;
+  --bg-white: #FFFFFF;
+  --border: #EBEBEB;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --radius-sm: 8rpx;
+  --radius-md: 16rpx;
+  --radius-lg: 24rpx;
+  --font-lg: 36rpx;
+  --font-md: 28rpx;
+  --font-sm: 24rpx;
+  --font-xs: 20rpx;
+
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  background: var(--bg-page);
+  line-height: 1.5;
+}
+
+/* 安全区域适配 */
+.safe-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 通用卡片 */
+.card {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  margin: 20rpx;
+  padding: 24rpx;
+  box-shadow: var(--shadow);
+}
+
+/* 通用按钮 */
+.btn-primary {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.btn-primary:active {
+  background: #B8320A !important;
+}
+
+.btn-outline {
+  background: #fff !important;
+  color: var(--primary) !important;
+  border: 2rpx solid var(--primary) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.btn-success {
+  background: var(--success) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.btn-danger {
+  background: var(--danger) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* 文本截断 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 价格样式 */
+.price {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.price::before {
+  content: '¥';
+  font-size: var(--font-xs);
+  font-weight: 500;
+  margin-right: 2rpx;
+}
+
+.price-large {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 40rpx;
+}
+
+.price-large::before {
+  content: '¥';
+  font-size: 24rpx;
+  font-weight: 500;
+  margin-right: 2rpx;
+}
+
+/* 状态标签 */
+.badge {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: var(--font-xs);
+  font-weight: 500;
+}
+
+.badge-pending {
+  background: #FFF3EC;
+  color: #FF6B3D;
+}
+
+.badge-accepted {
+  background: #E8F4FD;
+  color: #1989FA;
+}
+
+.badge-completed {
+  background: #E8F8EF;
+  color: #0A9F4E;
+}
+
+.badge-cancelled {
+  background: #F5F5F5;
+  color: #999;
+}
+
+/* Flex 工具类 */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+/* 间距 */
+.mt-20 { margin-top: 20rpx; }
+.mb-20 { margin-bottom: 20rpx; }
+.p-20 { padding: 20rpx; }
+
+/* 空状态 */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+}
+
+.empty-icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.4;
+}
+
+.empty-text {
+  font-size: var(--font-md);
+  color: var(--text-hint);
+}
+
+/* 固定底部 */
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}

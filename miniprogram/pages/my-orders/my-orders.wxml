@@ -1,0 +1,55 @@
+<!-- 我的订单 -->
+<view class="page">
+  <!-- 状态筛选 -->
+  <view class="tabs">
+    <view class="tab {{currentTab === 'all' ? 'active' : ''}}" data-tab="all" bindtap="switchTab">全部</view>
+    <view class="tab {{currentTab === 'pending' ? 'active' : ''}}" data-tab="pending" bindtap="switchTab">进行中</view>
+    <view class="tab {{currentTab === 'completed' ? 'active' : ''}}" data-tab="completed" bindtap="switchTab">已完成</view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view wx:if="{{orders.length > 0}}">
+    <view class="order-card" wx:for="{{orders}}" wx:key="_id" bindtap="viewOrder" data-id="{{item._id}}">
+      <view class="oc-header">
+        <view class="oc-no">{{item.orderNo}}</view>
+        <view class="badge badge-{{item.status}}">
+          {{item.status === 'pending' ? '待处理' : ''}}
+          {{item.status === 'accepted' ? '已接单' : ''}}
+          {{item.status === 'completed' ? '已完成' : ''}}
+          {{item.status === 'cancelled' ? '已取消' : ''}}
+        </view>
+      </view>
+      <view class="oc-items">
+        <view class="oc-item" wx:for="{{item.items}}" wx:for-item="di" wx:key="dishId">
+          <image class="oci-img" src="{{di.image || '/images/dish-placeholder.png'}}" mode="aspectFill"></image>
+          <view class="oci-name ellipsis">{{di.name}}</view>
+          <view class="oci-qty">x{{di.quantity}}</view>
+        </view>
+      </view>
+      <view class="oc-footer">
+        <view class="oc-time">{{item.createdAt}}</view>
+        <view class="oc-total">
+          <text>共{{item.totalQuantity}}件 合计</text>
+          <text class="price">{{item.totalPrice}}</text>
+        </view>
+      </view>
+      <view class="oc-edited" wx:if="{{item.isEdited}}">
+        <text>⚠ 商家已调整订单</text>
+      </view>
+    </view>
+
+    <view class="load-more" wx:if="{{hasMore}}">
+      <text bindtap="loadMore">加载更多</text>
+    </view>
+    <view class="no-more" wx:else>
+      <text>—— 没有更多了 ——</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-container" wx:if="{{orders.length === 0 && loaded}}">
+    <image class="empty-icon" src="/images/empty-order.png" mode="aspectFit"></image>
+    <view class="empty-text">暂无订单</view>
+    <navigator url="/pages/menu/menu" open-type="switchTab" class="go-menu-btn">去点餐</navigator>
+  </view>
+</view>

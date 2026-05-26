@@ -1,0 +1,9 @@
+{
+  "name": "dengshi-bbq",
+  "version": "1.0.0",
+  "description": "邓师烧烤点餐小程序",
+  "main": "app.js",
+  "dependencies": {
+    "@vant/weapp": "^1.11.0"
+  }
+}

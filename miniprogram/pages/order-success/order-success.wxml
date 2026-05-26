@@ -1,0 +1,12 @@
+<!-- 下单成功 -->
+<view class="page flex-center flex-col">
+  <view class="success-icon">✓</view>
+  <view class="success-title">下单成功</view>
+  <view class="success-no">订单号：{{orderNo}}</view>
+  <view class="success-tip">商家正在准备您的菜品，请稍候</view>
+
+  <view class="success-actions">
+    <button class="btn-primary btn-block" bindtap="viewOrder">查看订单</button>
+    <button class="btn-outline btn-block" bindtap="goMenu">继续点餐</button>
+  </view>
+</view>

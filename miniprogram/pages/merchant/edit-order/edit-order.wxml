@@ -1,0 +1,71 @@
+<!-- 商家编辑订单 -->
+<view class="page">
+  <view class="card" wx:if="{{loaded}}">
+    <view class="card-title">编辑菜品</view>
+
+    <!-- 当前菜品列表 -->
+    <view class="edit-item" wx:for="{{items}}" wx:key="dishId">
+      <view class="ei-info">
+        <view class="ei-name">{{item.name}}</view>
+        <view class="ei-price"><text class="price">{{item.price}}</text></view>
+      </view>
+      <view class="ei-stepper">
+        <view class="stepper-btn minus {{item.quantity <= 0 ? 'disabled' : ''}}" bindtap="decreaseQty" data-index="{{index}}">
+          <text>-</text>
+        </view>
+        <view class="stepper-num">{{item.quantity}}</view>
+        <view class="stepper-btn plus" bindtap="increaseQty" data-index="{{index}}">
+          <text>+</text>
+        </view>
+      </view>
+      <view class="ei-del" bindtap="removeItem" data-index="{{index}}">
+        <text>✕</text>
+      </view>
+    </view>
+
+    <!-- 添加菜品按钮 -->
+    <view class="add-dish-btn" bindtap="showDishPicker">
+      <text>+ 添加菜品</text>
+    </view>
+
+    <!-- 备注 -->
+    <view class="remark-group">
+      <view class="remark-label">备注</view>
+      <textarea class="remark-input" placeholder="修改备注..." value="{{remark}}" bindinput="onRemarkInput" maxlength="200" auto-height/>
+    </view>
+
+    <!-- 总计 -->
+    <view class="edit-total">
+      <text>修改后合计：</text>
+      <text class="price-large">{{totalPrice}}</text>
+      <text>（原价</text>
+      <text class="price">{{originalTotal}}</text>
+      <text>）</text>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-area">
+    <button class="btn-save" bindtap="saveChanges">保存修改</button>
+  </view>
+
+  <!-- 菜品选择弹窗 -->
+  <view class="picker-popup {{showPicker ? 'show' : ''}}">
+    <view class="picker-mask" bindtap="closePicker"></view>
+    <view class="picker-panel">
+      <view class="picker-header">
+        <text class="picker-title">选择菜品</text>
+        <text class="picker-close" bindtap="closePicker">✕</text>
+      </view>
+      <scroll-view scroll-y class="picker-list">
+        <view class="picker-item" wx:for="{{menuDishes}}" wx:key="_id" bindtap="selectDish" data-dish="{{item}}">
+          <view class="pi-info">
+            <view class="pi-name ellipsis">{{item.name}}</view>
+            <view class="pi-price"><text class="price">{{item.price}}</text>/{{item.unit}}</view>
+          </view>
+          <view class="pi-add">+</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

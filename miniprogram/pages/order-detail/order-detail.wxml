@@ -1,0 +1,66 @@
+<!-- 订单详情 -->
+<view class="page">
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{!loaded}}">
+    <text>加载中...</text>
+  </view>
+
+  <view wx:else>
+    <!-- 订单状态 -->
+    <view class="status-bar status-{{order.status}}">
+      <view class="status-text">
+        {{order.status === 'pending' ? '等待商家接单' : ''}}
+        {{order.status === 'accepted' ? '商家已接单，正在准备' : ''}}
+        {{order.status === 'completed' ? '订单已完成' : ''}}
+        {{order.status === 'cancelled' ? '订单已取消' : ''}}
+      </view>
+      <view class="status-no">{{order.orderNo}}</view>
+    </view>
+
+    <!-- 编辑提示 -->
+    <view class="edit-notice" wx:if="{{order.isEdited}}">
+      <text>⚠ 商家已调整此订单的菜品或数量</text>
+    </view>
+
+    <!-- 菜品列表 -->
+    <view class="card">
+      <view class="card-title">菜品明细</view>
+      <view class="dl-item" wx:for="{{order.items}}" wx:key="dishId">
+        <image class="dli-img" src="{{item.image || '/images/dish-placeholder.png'}}" mode="aspectFill"></image>
+        <view class="dli-info">
+          <view class="dli-name">{{item.name}}</view>
+          <view class="dli-price"><text class="price">{{item.price}}</text></view>
+        </view>
+        <view class="dli-qty">x{{item.quantity}}</view>
+        <view class="dli-subtotal"><text class="price">{{item.subtotal}}</text></view>
+      </view>
+      <view class="dl-total">
+        <text>共{{order.totalQuantity}}件，合计</text>
+        <text class="price-large">{{order.totalPrice}}</text>
+      </view>
+    </view>
+
+    <!-- 备注 -->
+    <view class="card" wx:if="{{order.remark}}">
+      <view class="card-title">备注</view>
+      <view class="remark-text">{{order.remark}}</view>
+    </view>
+
+    <!-- 时间信息 -->
+    <view class="card">
+      <view class="info-row">
+        <text class="info-label">下单时间</text>
+        <text class="info-value">{{order.createdAt}}</text>
+      </view>
+      <view class="info-row" wx:if="{{order.completedAt}}">
+        <text class="info-label">完成时间</text>
+        <text class="info-value">{{order.completedAt}}</text>
+      </view>
+    </view>
+
+    <!-- 取消按钮 -->
+    <view class="action-area" wx:if="{{order.status === 'pending'}}">
+      <button class="btn-danger btn-block" bindtap="cancelOrder">取消订单</button>
+    </view>
+  </view>
+</view>

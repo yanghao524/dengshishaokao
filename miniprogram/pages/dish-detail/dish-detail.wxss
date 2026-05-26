@@ -1,0 +1,91 @@
+.page {
+  min-height: 100vh;
+  background: #fff;
+}
+.detail-img {
+  width: 100%;
+  height: 500rpx;
+  background: #f0f0f0;
+}
+.detail-body {
+  padding: 32rpx 24rpx;
+}
+.detail-name {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+.detail-price-row {
+  margin-top: 16rpx;
+}
+.detail-price-row .unit {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+  margin-left: 4rpx;
+}
+.detail-desc {
+  margin-top: 20rpx;
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.detail-sold {
+  margin-top: 40rpx;
+  text-align: center;
+  color: var(--text-hint);
+  font-size: var(--font-md);
+}
+.detail-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60rpx;
+  padding-top: 32rpx;
+  border-top: 1rpx solid var(--border);
+}
+.stepper-ctn {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.stepper-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.stepper-btn.minus {
+  border: 2rpx solid var(--primary);
+  color: var(--primary);
+}
+.stepper-btn.minus.disabled {
+  border-color: #ddd;
+  color: #ddd;
+}
+.stepper-btn.plus {
+  background: var(--primary);
+  color: #fff;
+}
+.stepper-num {
+  width: 72rpx;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.btn-submit {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 56rpx;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: var(--font-md);
+  font-weight: 600;
+  border: none;
+}
+.btn-submit::after {
+  border: none;
+}

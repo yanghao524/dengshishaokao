@@ -1,0 +1,47 @@
+<!-- 购物车 -->
+<view class="page">
+  <!-- 空状态 -->
+  <view class="empty-container" wx:if="{{cartSummary.isEmpty}}">
+    <image class="empty-icon" src="/images/empty-cart.png" mode="aspectFit"></image>
+    <view class="empty-text">购物车空空如也</view>
+    <navigator url="/pages/menu/menu" open-type="switchTab" class="go-menu-btn">去点餐</navigator>
+  </view>
+
+  <!-- 购物车列表 -->
+  <view wx:else>
+    <view class="cart-list">
+      <view class="cart-item" wx:for="{{cartSummary.items}}" wx:key="dishId">
+        <image class="cart-item-img" src="{{item.image || '/images/dish-placeholder.png'}}" mode="aspectFill"></image>
+        <view class="cart-item-info">
+          <view class="cart-item-name ellipsis">{{item.name}}</view>
+          <view class="cart-item-price">
+            <text class="price">{{item.price}}</text>
+          </view>
+        </view>
+        <view class="cart-item-stepper">
+          <view class="stepper-btn minus {{item.quantity <= 1 ? 'disabled' : ''}}" data-id="{{item.dishId}}" data-qty="{{item.quantity - 1}}" bindtap="changeQty">
+            <text>-</text>
+          </view>
+          <view class="stepper-num">{{item.quantity}}</view>
+          <view class="stepper-btn plus" data-id="{{item.dishId}}" data-qty="{{item.quantity + 1}}" bindtap="changeQty">
+            <text>+</text>
+          </view>
+        </view>
+        <view class="cart-item-del" data-id="{{item.dishId}}" bindtap="removeItem">
+          <text>✕</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部结算 -->
+    <view class="cart-footer">
+      <view class="cart-footer-left">
+        <text class="cart-footer-label">合计：</text>
+        <text class="price-large">{{cartSummary.totalPrice}}</text>
+      </view>
+      <button class="btn-submit" bindtap="goOrderConfirm">
+        去下单 ({{cartSummary.totalQuantity}})
+      </button>
+    </view>
+  </view>
+</view>

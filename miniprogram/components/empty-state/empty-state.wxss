@@ -1,0 +1,5 @@
+.empty-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120rpx 40rpx; }
+.empty-icon { width: 200rpx; height: 200rpx; margin-bottom: 24rpx; opacity: 0.4; }
+.empty-text { font-size: var(--font-md); color: var(--text-hint); }
+.empty-btn { margin-top: 32rpx; padding: 16rpx 48rpx; background: var(--primary); color: #fff; border-radius: 40rpx; font-size: var(--font-md); border: none; }
+.empty-btn::after { border: none; }

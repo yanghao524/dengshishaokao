@@ -1,0 +1,33 @@
+.page {
+  min-height: 100vh;
+  background: #fff;
+}
+.content {
+  padding: 40rpx 32rpx;
+}
+.title {
+  font-size: 36rpx;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12rpx;
+}
+.update-date {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+.section {
+  margin-bottom: 32rpx;
+}
+.s-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+.s-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 6rpx;
+}

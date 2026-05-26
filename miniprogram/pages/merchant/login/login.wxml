@@ -1,0 +1,20 @@
+<!-- 商家登录 -->
+<view class="page flex-center flex-col">
+  <view class="login-card">
+    <view class="login-title">商家登录</view>
+    <view class="login-subtitle">邓师烧烤 · 后台管理</view>
+
+    <view class="form-group">
+      <view class="form-label">用户名</view>
+      <input class="form-input" placeholder="请输入用户名" value="{{username}}" bindinput="onUsernameInput"/>
+    </view>
+    <view class="form-group">
+      <view class="form-label">密码</view>
+      <input class="form-input" type="password" placeholder="请输入密码" value="{{password}}" bindinput="onPasswordInput"/>
+    </view>
+
+    <button class="btn-login" bindtap="login" loading="{{loading}}" disabled="{{loading}}">
+      {{loading ? '登录中...' : '登录'}}
+    </button>
+  </view>
+</view>

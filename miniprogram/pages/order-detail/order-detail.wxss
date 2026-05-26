@@ -1,0 +1,156 @@
+/* 订单详情 */
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 80rpx;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  padding-top: 200rpx;
+  color: var(--text-hint);
+}
+
+/* 状态栏 */
+.status-bar {
+  padding: 32rpx 20rpx;
+  text-align: center;
+}
+.status-pending { background: linear-gradient(135deg, #FFF3EC, #FFE8D6); }
+.status-accepted { background: linear-gradient(135deg, #E8F4FD, #D6EDFF); }
+.status-completed { background: linear-gradient(135deg, #E8F8EF, #D0F0DE); }
+.status-cancelled { background: linear-gradient(135deg, #F5F5F5, #EBEBEB); }
+
+.status-text {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+.status-pending .status-text { color: #FF6B3D; }
+.status-accepted .status-text { color: #1989FA; }
+.status-completed .status-text { color: #0A9F4E; }
+.status-cancelled .status-text { color: #999; }
+
+.status-no {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+/* 编辑提示 */
+.edit-notice {
+  margin: 0 20rpx 20rpx;
+  padding: 16rpx 20rpx;
+  background: #FFF3EC;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  color: #FF6B3D;
+  text-align: center;
+}
+
+/* 卡片 */
+.card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  margin: 0 20rpx 20rpx;
+  padding: 24rpx;
+}
+.card-title {
+  font-size: var(--font-md);
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+/* 菜品明细 */
+.dl-item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.dl-item:last-of-type {
+  border-bottom: none;
+}
+.dli-img {
+  width: 72rpx;
+  height: 56rpx;
+  border-radius: 6rpx;
+  flex-shrink: 0;
+  background: #f0f0f0;
+}
+.dli-info {
+  flex: 1;
+  margin-left: 12rpx;
+  min-width: 0;
+}
+.dli-name {
+  font-size: var(--font-sm);
+}
+.dli-price {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  margin-top: 4rpx;
+}
+.dli-qty {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+  margin: 0 12rpx;
+}
+.dli-subtotal .price {
+  font-weight: 600;
+  font-size: var(--font-sm);
+}
+.dl-total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid var(--border);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  gap: 8rpx;
+}
+
+/* 备注 */
+.remark-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 信息行 */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12rpx 0;
+  font-size: var(--font-sm);
+}
+.info-label {
+  color: var(--text-hint);
+}
+.info-value {
+  color: var(--text-secondary);
+}
+
+/* 操作按钮 */
+.action-area {
+  padding: 20rpx;
+}
+.btn-block {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 44rpx;
+  font-size: var(--font-md);
+  font-weight: 600;
+  border: none;
+}
+.btn-block::after {
+  border: none;
+}
+.btn-danger {
+  background: #fff;
+  color: var(--danger);
+  border: 2rpx solid var(--danger) !important;
+}

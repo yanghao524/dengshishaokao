@@ -1,0 +1,66 @@
+<!-- 记账看板 -->
+<view class="page">
+  <!-- 日期选择 -->
+  <view class="date-picker">
+    <view class="date-btn" bindtap="prevDate">‹</view>
+    <view class="date-display" bindtap="showDatePicker">{{dateRange.start}} ~ {{dateRange.end}}</view>
+    <view class="date-btn" bindtap="nextDate">›</view>
+  </view>
+
+  <!-- 汇总卡片 -->
+  <view class="summary-cards">
+    <view class="sc-card">
+      <view class="sc-value price-large">{{summary.totalRevenue}}</view>
+      <view class="sc-label">营业额</view>
+    </view>
+    <view class="sc-card">
+      <view class="sc-value">{{summary.totalOrders}}</view>
+      <view class="sc-label">订单数</view>
+    </view>
+    <view class="sc-card">
+      <view class="sc-value">{{summary.avgPerOrder}}</view>
+      <view class="sc-label">均单消费</view>
+    </view>
+  </view>
+
+  <!-- 每日明细 -->
+  <view class="card">
+    <view class="card-title">每日明细</view>
+    <view class="daily-table" wx:if="{{dailyList.length > 0}}">
+      <view class="dt-row dt-header">
+        <text class="dt-date">日期</text>
+        <text class="dt-orders">单数</text>
+        <text class="dt-revenue">营业额</text>
+      </view>
+      <view class="dt-row" wx:for="{{dailyList}}" wx:key="date">
+        <text class="dt-date">{{item.date}}</text>
+        <text class="dt-orders">{{item.totalOrders}}</text>
+        <text class="dt-revenue"><text class="price">{{item.totalRevenue}}</text></text>
+      </view>
+    </view>
+    <view class="empty-row" wx:else>
+      <text>{{loaded ? '暂无数据' : '加载中...'}}</text>
+    </view>
+  </view>
+
+  <!-- 菜品销量排行 -->
+  <view class="card">
+    <view class="card-title">菜品销量排行</view>
+    <view class="rank-list" wx:if="{{dishRank.length > 0}}">
+      <view class="rank-item" wx:for="{{dishRank}}" wx:key="dishId">
+        <view class="rank-num {{index < 3 ? 'top' + (index + 1) : ''}}">{{index + 1}}</view>
+        <view class="rank-info">
+          <view class="rank-name ellipsis">{{item.name}}</view>
+          <view class="rank-bar-wrap">
+            <view class="rank-bar" style="width: {{item.percent}}%"></view>
+          </view>
+        </view>
+        <view class="rank-qty">{{item.totalQty}}件</view>
+        <view class="rank-amount"><text class="price">{{item.totalAmount}}</text></view>
+      </view>
+    </view>
+    <view class="empty-row" wx:else>
+      <text>{{loaded ? '暂无数据' : '加载中...'}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,137 @@
+/* 订单确认 */
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 160rpx;
+}
+.card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  margin: 20rpx;
+  padding: 24rpx;
+}
+.card-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid var(--border);
+}
+
+/* 表单 */
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.form-item:last-child {
+  border-bottom: none;
+}
+.form-item.required .form-label::before {
+  content: '* ';
+  color: var(--danger);
+}
+.form-label {
+  width: 140rpx;
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+.form-input {
+  flex: 1;
+  font-size: var(--font-md);
+  text-align: right;
+}
+.form-input::placeholder {
+  color: #ccc;
+}
+
+/* 订单菜品 */
+.order-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.order-item:last-child {
+  border-bottom: none;
+}
+.oi-img {
+  width: 80rpx;
+  height: 64rpx;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  background: #f0f0f0;
+}
+.oi-info {
+  flex: 1;
+  margin-left: 16rpx;
+  min-width: 0;
+}
+.oi-name {
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+.oi-price {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  margin-top: 4rpx;
+}
+.oi-qty {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin: 0 16rpx;
+}
+.oi-subtotal .price {
+  font-size: var(--font-sm);
+  font-weight: 600;
+}
+
+.order-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid var(--border);
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  gap: 8rpx;
+}
+
+/* 备注 */
+.remark-input {
+  width: 100%;
+  min-height: 100rpx;
+  font-size: var(--font-md);
+  padding: 8rpx 0;
+}
+.remark-input::placeholder {
+  color: #ccc;
+}
+
+/* 提交 */
+.submit-area {
+  padding: 30rpx 20rpx;
+  padding-bottom: calc(30rpx + env(safe-area-inset-bottom));
+}
+.btn-submit-order {
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  background: linear-gradient(135deg, #D4380D, #FF6B3D);
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 700;
+  border-radius: 48rpx;
+  text-align: center;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(212, 56, 13, 0.35);
+}
+.btn-submit-order::after {
+  border: none;
+}
+.btn-submit-order[disabled] {
+  opacity: 0.6;
+}

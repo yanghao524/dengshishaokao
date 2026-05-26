@@ -1,0 +1,181 @@
+/* 订单看板 */
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶栏 */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 24rpx;
+  background: #fff;
+}
+.top-title {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+.top-actions {
+  display: flex;
+  gap: 16rpx;
+}
+.top-btn {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: #fff;
+  padding: 0 20rpx;
+  border-bottom: 1rpx solid var(--border);
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  border-bottom: 4rpx solid transparent;
+  position: relative;
+}
+.tab.active {
+  color: var(--primary);
+  font-weight: 700;
+  border-bottom-color: var(--primary);
+}
+.tab-count {
+  position: absolute;
+  top: 10rpx;
+  right: 8rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  background: #FF4D4F;
+  color: #fff;
+  font-size: 18rpx;
+  border-radius: 16rpx;
+  padding: 0 6rpx;
+  font-weight: 500;
+}
+
+/* 连接状态 */
+.ws-status {
+  padding: 8rpx 20rpx;
+  text-align: center;
+  font-size: var(--font-xs);
+}
+.ws-status.connected { color: var(--success); }
+.ws-status.disconnected { color: var(--text-hint); }
+
+/* 订单列表 */
+.order-list {
+  flex: 1;
+  padding: 0 20rpx;
+}
+.order-card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 24rpx;
+  margin-top: 20rpx;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.order-card.new-highlight {
+  animation: highlight 2s ease;
+}
+@keyframes highlight {
+  0% { background: #FFF8E1; }
+  100% { background: #fff; }
+}
+.oc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12rpx;
+}
+.oc-no {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.oc-customer {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+  margin-top: 4rpx;
+}
+.oc-right {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.edited-tag {
+  font-size: 18rpx;
+  color: #FF6B3D;
+  background: #FFF3EC;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+}
+.oc-items {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 12rpx 0;
+  border-top: 1rpx solid #f5f5f5;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.oc-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12rpx;
+}
+.oc-time {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+.oc-total {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+.oc-total .price {
+  font-size: var(--font-md);
+  font-weight: 700;
+  margin-left: 4rpx;
+}
+.oc-quick-accept {
+  margin-top: 16rpx;
+  padding: 12rpx 0;
+  text-align: center;
+  background: var(--primary-bg);
+  color: var(--primary);
+  border-radius: 8rpx;
+  font-size: var(--font-sm);
+  font-weight: 600;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 120rpx 0;
+  font-size: var(--font-md);
+  color: var(--text-hint);
+}
+.list-bottom {
+  text-align: center;
+  padding: 32rpx 0;
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}

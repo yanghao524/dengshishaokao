@@ -1,0 +1,107 @@
+<!-- 菜品管理 -->
+<view class="page">
+  <!-- Tab切换 -->
+  <view class="tabs">
+    <view class="tab {{currentTab === 'dishes' ? 'active' : ''}}" data-tab="dishes" bindtap="switchTab">菜品管理</view>
+    <view class="tab {{currentTab === 'categories' ? 'active' : ''}}" data-tab="categories" bindtap="switchTab">分类管理</view>
+  </view>
+
+  <!-- ===== 菜品管理 ===== -->
+  <view wx:if="{{currentTab === 'dishes'}}">
+    <!-- 分类筛选 -->
+    <scroll-view scroll-x class="cat-filter">
+      <view class="cf-item {{filterCatId === '' ? 'active' : ''}}" data-id="" bindtap="filterCategory">全部</view>
+      <view class="cf-item {{filterCatId === item._id ? 'active' : ''}}" wx:for="{{categories}}" wx:key="_id" data-id="{{item._id}}" bindtap="filterCategory">{{item.name}}</view>
+    </scroll-view>
+
+    <!-- 菜品列表 -->
+    <view class="dish-list">
+      <view class="dish-row" wx:for="{{filteredDishes}}" wx:key="_id">
+        <image class="dr-img" src="{{item.image || '/images/dish-placeholder.png'}}" mode="aspectFill"></image>
+        <view class="dr-info">
+          <view class="dr-name ellipsis">{{item.name}}</view>
+          <view class="dr-price"><text class="price">{{item.price}}</text>/{{item.unit}}</view>
+        </view>
+        <switch class="dr-switch" checked="{{item.isAvailable}}" bindchange="toggleDish" data-id="{{item._id}}" color="#D4380D"/>
+        <view class="dr-edit" bindtap="editDish" data-dish="{{item}}">编辑</view>
+        <view class="dr-del" bindtap="deleteDish" data-id="{{item._id}}">✕</view>
+      </view>
+    </view>
+
+    <!-- 添加菜品按钮 -->
+    <view class="add-btn" bindtap="addDish">
+      <text>+ 添加菜品</text>
+    </view>
+  </view>
+
+  <!-- ===== 分类管理 ===== -->
+  <view wx:if="{{currentTab === 'categories'}}">
+    <view class="cat-list">
+      <view class="cat-row" wx:for="{{categories}}" wx:key="_id">
+        <text class="cr-name">{{item.name}}</text>
+        <text class="cr-order">排序: {{item.sortOrder}}</text>
+        <view class="cr-edit" bindtap="editCategory" data-cat="{{item}}">编辑</view>
+        <view class="cr-del" bindtap="deleteCategory" data-id="{{item._id}}">✕</view>
+      </view>
+    </view>
+    <view class="add-btn" bindtap="addCategory">
+      <text>+ 添加分类</text>
+    </view>
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view class="edit-popup {{showEditPopup ? 'show' : ''}}">
+    <view class="ep-mask" bindtap="closeEditPopup"></view>
+    <view class="ep-panel">
+      <view class="ep-title">{{editTitle}}</view>
+
+      <block wx:if="{{editTarget === 'dish'}}">
+        <view class="ep-field">
+          <text class="ep-label">菜品名称</text>
+          <input class="ep-input" value="{{editForm.name}}" data-field="name" bindinput="onEditInput" placeholder="请输入"/>
+        </view>
+        <view class="ep-field">
+          <text class="ep-label">所属分类</text>
+          <picker class="ep-picker" range="{{categories}}" range-key="name" value="{{editForm.categoryIndex}}" bindchange="onCategoryChange">
+            <text>{{categories[editForm.categoryIndex] ? categories[editForm.categoryIndex].name : '请选择'}}</text>
+          </picker>
+        </view>
+        <view class="ep-field">
+          <text class="ep-label">价格 (元)</text>
+          <input class="ep-input" type="digit" value="{{editForm.price}}" data-field="price" bindinput="onEditInput" placeholder="0.00"/>
+        </view>
+        <view class="ep-field">
+          <text class="ep-label">单位</text>
+          <input class="ep-input" value="{{editForm.unit}}" data-field="unit" bindinput="onEditInput" placeholder="份/串/只"/>
+        </view>
+        <view class="ep-field">
+          <text class="ep-label">描述</text>
+          <textarea class="ep-textarea" value="{{editForm.description}}" data-field="description" bindinput="onEditInput" placeholder="菜品描述..." maxlength="200"/>
+        </view>
+        <view class="ep-field">
+          <text class="ep-label">图片</text>
+          <view class="ep-img-upload" bindtap="uploadImage">
+            <image wx:if="{{editForm.image}}" class="ep-img-preview" src="{{editForm.image}}" mode="aspectFill"></image>
+            <text wx:else class="ep-img-placeholder">点击上传</text>
+          </view>
+        </view>
+      </block>
+
+      <block wx:if="{{editTarget === 'category'}}">
+        <view class="ep-field">
+          <text class="ep-label">分类名称</text>
+          <input class="ep-input" value="{{editForm.name}}" data-field="name" bindinput="onEditInput" placeholder="如：牛肉类"/>
+        </view>
+        <view class="ep-field">
+          <text class="ep-label">排序</text>
+          <input class="ep-input" type="number" value="{{editForm.sortOrder}}" data-field="sortOrder" bindinput="onEditInput" placeholder="0"/>
+        </view>
+      </block>
+
+      <view class="ep-btns">
+        <button class="ep-btn cancel" bindtap="closeEditPopup">取消</button>
+        <button class="ep-btn confirm" bindtap="saveEdit">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

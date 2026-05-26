@@ -1,0 +1,126 @@
+<!-- 菜单页 -->
+<view class="menu-page">
+  <!-- 主体区域 -->
+  <view class="menu-body">
+    <!-- 左侧分类栏 -->
+    <scroll-view scroll-y class="category-side" enhanced show-scrollbar="{{false}}">
+      <view
+        wx:for="{{categories}}"
+        wx:key="_id"
+        class="cat-item {{currentCatId === item._id ? 'active' : ''}}"
+        data-id="{{item._id}}"
+        bindtap="switchCategory"
+      >
+        <view class="cat-name">{{item.name}}</view>
+        <view class="cat-count">{{item.dishCount}}</view>
+        <view class="cat-indicator" wx:if="{{currentCatId === item._id}}"></view>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧菜品列表 -->
+    <scroll-view
+      scroll-y
+      class="dish-scroll"
+      id="dish-scroll"
+      scroll-into-view="{{scrollToId}}"
+      scroll-with-animation
+      bindscroll="onDishScroll"
+    >
+      <view wx:for="{{categories}}" wx:key="_id" id="cat-{{item._id}}">
+        <!-- 分类标题 -->
+        <view class="cat-header">{{item.name}}</view>
+
+        <!-- 菜品卡片 -->
+        <view
+          class="dish-card"
+          wx:for="{{item.dishes}}"
+          wx:for-item="dish"
+          wx:key="_id"
+        >
+          <image
+            class="dish-img"
+            src="{{dish.image || '/images/dish-placeholder.png'}}"
+            mode="aspectFill"
+            bindtap="showDetail"
+            data-dish="{{dish}}"
+          ></image>
+          <view class="dish-info">
+            <view class="dish-name ellipsis" bindtap="showDetail" data-dish="{{dish}}">{{dish.name}}</view>
+            <view class="dish-desc ellipsis" wx:if="{{dish.description}}">{{dish.description}}</view>
+            <view class="dish-bottom">
+              <view class="dish-price-wrap">
+                <text class="price">{{dish.price}}</text>
+                <text class="unit">/{{dish.unit}}</text>
+              </view>
+              <!-- 加减按钮 -->
+              <view class="stepper">
+                <view class="stepper-btn minus {{cartQtys[dish._id] > 0 ? '' : 'hidden'}}" data-dish="{{dish}}" bindtap="decreaseQty">
+                  <text>-</text>
+                </view>
+                <view class="stepper-num {{cartQtys[dish._id] > 0 ? '' : 'hidden'}}">{{cartQtys[dish._id] || 0}}</view>
+                <view class="stepper-btn plus" data-dish="{{dish}}" bindtap="increaseQty">
+                  <text>+</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 空分类提示 -->
+        <view class="empty-dishes" wx:if="{{item.dishes.length === 0}}">
+          <text>暂无菜品</text>
+        </view>
+      </view>
+
+      <view class="scroll-bottom-hint">—— 已全部加载 ——</view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部购物车栏 -->
+  <view class="cart-bar" wx:if="{{cartSummary.totalQuantity > 0}}" bindtap="goCart">
+    <view class="cart-bar-left">
+      <view class="cart-icon-wrap">
+        <text class="cart-icon">🛒</text>
+        <view class="cart-badge">{{cartSummary.totalQuantity}}</view>
+      </view>
+      <view class="cart-summary">
+        <view class="cart-total">
+          <text class="price">{{cartSummary.totalPrice}}</text>
+        </view>
+        <view class="cart-items-count">共{{cartSummary.totalQuantity}}件</view>
+      </view>
+    </view>
+    <view class="cart-bar-btn">
+      <text>去下单</text>
+    </view>
+  </view>
+
+  <!-- 菜品详情弹窗 -->
+  <view class="detail-popup {{showDetailPopup ? 'show' : ''}}" catchtouchmove="{{true}}">
+    <view class="detail-mask" bindtap="closeDetail"></view>
+    <view class="detail-panel">
+      <view class="detail-close" bindtap="closeDetail">✕</view>
+      <image class="detail-img" src="{{detailDish.image || '/images/dish-placeholder.png'}}" mode="aspectFill"></image>
+      <view class="detail-body">
+        <view class="detail-name">{{detailDish.name}}</view>
+        <view class="detail-price-row">
+          <text class="price-large">{{detailDish.price}}</text>
+          <text class="unit">/{{detailDish.unit}}</text>
+        </view>
+        <view class="detail-desc" wx:if="{{detailDish.description}}">{{detailDish.description}}</view>
+        <view class="detail-actions">
+          <view class="stepper large">
+            <view class="stepper-btn minus" bindtap="detailDecrease">
+              <text>-</text>
+            </view>
+            <view class="stepper-num">{{detailQuantity}}</view>
+            <view class="stepper-btn plus" bindtap="detailIncrease">
+              <text>+</text>
+            </view>
+          </view>
+          <button class="btn-add-cart" bindtap="addDetailToCart">加入购物车</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

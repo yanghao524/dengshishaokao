@@ -1,0 +1,155 @@
+/* 记账看板 */
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 60rpx;
+}
+
+/* 日期选择 */
+.date-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 24rpx;
+  background: #fff;
+  gap: 20rpx;
+}
+.date-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+.date-display {
+  font-size: var(--font-md);
+  font-weight: 600;
+  padding: 8rpx 24rpx;
+  background: var(--bg-page);
+  border-radius: 24rpx;
+}
+
+/* 汇总卡片 */
+.summary-cards {
+  display: flex;
+  padding: 20rpx;
+  gap: 16rpx;
+}
+.sc-card {
+  flex: 1;
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 24rpx 16rpx;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.sc-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+.sc-label {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+}
+
+/* 卡片 */
+.card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  margin: 0 20rpx 20rpx;
+  padding: 24rpx;
+}
+.card-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+/* 每日明细表 */
+.dt-row {
+  display: flex;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+  font-size: var(--font-sm);
+}
+.dt-header {
+  color: var(--text-hint);
+  font-weight: 500;
+  border-bottom: 2rpx solid var(--border);
+}
+.dt-date { flex: 1.2; }
+.dt-orders { flex: 0.8; text-align: center; }
+.dt-revenue { flex: 1; text-align: right; font-weight: 600; }
+.dt-revenue .price { font-weight: 700; }
+
+/* 销量排行 */
+.rank-item {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+.rank-num {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--text-hint);
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+.rank-num.top1 { background: #FF6B3D; color: #fff; }
+.rank-num.top2 { background: #FF976A; color: #fff; }
+.rank-num.top3 { background: #FFB088; color: #fff; }
+.rank-info {
+  flex: 1;
+  min-width: 0;
+  margin-right: 12rpx;
+}
+.rank-name {
+  font-size: var(--font-sm);
+  margin-bottom: 6rpx;
+}
+.rank-bar-wrap {
+  height: 6rpx;
+  background: #f0f0f0;
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+.rank-bar {
+  height: 100%;
+  background: var(--primary-light);
+  border-radius: 3rpx;
+  min-width: 4rpx;
+  transition: width 0.5s ease;
+}
+.rank-qty {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+  margin-right: 12rpx;
+  width: 60rpx;
+  text-align: right;
+}
+.rank-amount {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  width: 100rpx;
+  text-align: right;
+}
+.empty-row {
+  text-align: center;
+  padding: 40rpx;
+  color: var(--text-hint);
+  font-size: var(--font-sm);
+}

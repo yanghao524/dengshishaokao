@@ -1,0 +1,26 @@
+<!-- 菜品卡片组件 -->
+<view class="dish-card {{cardStyle}}" bindtap="onTap">
+  <image class="dish-img" src="{{dish.image || '/images/dish-placeholder.png'}}" mode="aspectFill"></image>
+  <view class="dish-info">
+    <view class="dish-name ellipsis">{{dish.name}}</view>
+    <view class="dish-desc ellipsis" wx:if="{{dish.description && cardStyle !== 'compact'}}">{{dish.description}}</view>
+    <view class="dish-bottom">
+      <view class="dish-price-wrap">
+        <text class="price">{{dish.price}}</text>
+        <text class="unit">/{{dish.unit}}</text>
+      </view>
+      <view class="stepper" wx:if="{{showStepper}}">
+        <view class="stepper-btn minus {{quantity > 0 ? '' : 'hidden'}}" catchtap="onDecrease">
+          <text>-</text>
+        </view>
+        <view class="stepper-num {{quantity > 0 ? '' : 'hidden'}}">{{quantity}}</view>
+        <view class="stepper-btn plus" catchtap="onIncrease">
+          <text>+</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="sold-out-mask" wx:if="{{!dish.isAvailable}}">
+    <text>售罄</text>
+  </view>
+</view>

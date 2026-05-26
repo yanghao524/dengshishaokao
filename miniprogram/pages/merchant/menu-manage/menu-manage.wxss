@@ -1,0 +1,247 @@
+/* 菜品管理 */
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 60rpx;
+}
+.tabs {
+  display: flex;
+  background: #fff;
+  padding: 0 20rpx;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  border-bottom: 4rpx solid transparent;
+}
+.tab.active { color: var(--primary); font-weight: 700; border-bottom-color: var(--primary); }
+
+/* 分类筛选 */
+.cat-filter {
+  white-space: nowrap;
+  background: #fff;
+  padding: 16rpx 20rpx;
+  border-bottom: 1rpx solid var(--border);
+}
+.cf-item {
+  display: inline-block;
+  padding: 8rpx 24rpx;
+  margin-right: 12rpx;
+  border-radius: 24rpx;
+  font-size: var(--font-sm);
+  background: #f5f5f5;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.cf-item.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* 菜品列表 */
+.dish-list {
+  padding: 0 20rpx;
+}
+.dish-row {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin-top: 16rpx;
+  padding: 16rpx;
+  border-radius: var(--radius-sm);
+}
+.dr-img {
+  width: 80rpx;
+  height: 64rpx;
+  border-radius: 6rpx;
+  flex-shrink: 0;
+  background: #f0f0f0;
+}
+.dr-info {
+  flex: 1;
+  margin-left: 16rpx;
+  min-width: 0;
+}
+.dr-name {
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+.dr-price {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  margin-top: 4rpx;
+}
+.dr-switch {
+  margin: 0 12rpx;
+  flex-shrink: 0;
+}
+.dr-edit {
+  font-size: var(--font-xs);
+  color: var(--primary);
+  padding: 4rpx 12rpx;
+  flex-shrink: 0;
+}
+.dr-del {
+  width: 40rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: var(--text-hint);
+  flex-shrink: 0;
+}
+
+/* 分类列表 */
+.cat-list {
+  padding: 0 20rpx;
+}
+.cat-row {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin-top: 16rpx;
+  padding: 20rpx 16rpx;
+  border-radius: var(--radius-sm);
+}
+.cr-name {
+  flex: 1;
+  font-size: var(--font-md);
+  font-weight: 500;
+}
+.cr-order {
+  font-size: var(--font-xs);
+  color: var(--text-hint);
+  margin: 0 16rpx;
+}
+.cr-edit {
+  font-size: var(--font-xs);
+  color: var(--primary);
+  padding: 4rpx 12rpx;
+}
+.cr-del {
+  width: 40rpx;
+  text-align: center;
+  color: var(--text-hint);
+}
+
+/* 添加按钮 */
+.add-btn {
+  margin: 30rpx 20rpx;
+  padding: 24rpx;
+  text-align: center;
+  border: 2rpx dashed var(--primary);
+  border-radius: var(--radius-sm);
+  color: var(--primary);
+  font-size: var(--font-md);
+  font-weight: 500;
+}
+
+/* 编辑弹窗 */
+.edit-popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 300;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.3s;
+}
+.edit-popup.show { pointer-events: auto; opacity: 1; }
+.ep-mask {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+.ep-panel {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-radius: 32rpx 32rpx 0 0;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+}
+.ep-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+.ep-field {
+  margin-bottom: 24rpx;
+}
+.ep-label {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+  margin-bottom: 8rpx;
+  display: block;
+}
+.ep-input {
+  width: 100%;
+  height: 72rpx;
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 16rpx;
+  font-size: var(--font-md);
+  box-sizing: border-box;
+}
+.ep-picker {
+  height: 72rpx;
+  line-height: 72rpx;
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 16rpx;
+  font-size: var(--font-md);
+  color: var(--text-primary);
+}
+.ep-textarea {
+  width: 100%;
+  min-height: 100rpx;
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12rpx 16rpx;
+  font-size: var(--font-md);
+  box-sizing: border-box;
+}
+.ep-img-upload {
+  width: 160rpx;
+  height: 120rpx;
+  border: 2rpx dashed var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ep-img-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+}
+.ep-img-placeholder {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+}
+.ep-btns {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 32rpx;
+}
+.ep-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: var(--font-md);
+  font-weight: 600;
+  border: none;
+}
+.ep-btn::after { border: none; }
+.ep-btn.cancel {
+  background: #f5f5f5;
+  color: var(--text-secondary);
+}
+.ep-btn.confirm {
+  background: var(--primary);
+  color: #fff;
+}

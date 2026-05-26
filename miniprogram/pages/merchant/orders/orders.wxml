@@ -1,0 +1,83 @@
+<!-- 商家订单看板 -->
+<view class="page">
+  <!-- 顶栏 -->
+  <view class="top-bar">
+    <view class="top-title">订单管理</view>
+    <view class="top-actions">
+      <view class="top-btn" bindtap="toggleSound">
+        <text>{{soundOn ? '🔊' : '🔇'}}</text>
+      </view>
+      <view class="top-btn" bindtap="goAccounting">
+        <text>📊</text>
+      </view>
+      <view class="top-btn" bindtap="goMenuManage">
+        <text>📝</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tab筛选 -->
+  <view class="tabs">
+    <view class="tab {{currentTab === 'pending' ? 'active' : ''}}" data-tab="pending" bindtap="switchTab">
+      新订单<text class="tab-count" wx:if="{{pendingCount > 0}}">{{pendingCount}}</text>
+    </view>
+    <view class="tab {{currentTab === 'accepted' ? 'active' : ''}}" data-tab="accepted" bindtap="switchTab">进行中</view>
+    <view class="tab {{currentTab === 'completed' ? 'active' : ''}}" data-tab="completed" bindtap="switchTab">已完成</view>
+  </view>
+
+  <!-- 连接状态 -->
+  <view class="ws-status {{wsConnected ? 'connected' : 'disconnected'}}">
+    <text>{{wsConnected ? '实时监听中' : '监听断开，下拉刷新'}}</text>
+  </view>
+
+  <!-- 订单列表 -->
+  <scroll-view scroll-y class="order-list" refresher-enabled bindrefresherrefresh="onRefresh" refresher-triggered="{{refreshing}}">
+    <view class="order-card {{item._isNew ? 'new-highlight' : ''}}" wx:for="{{orders}}" wx:key="_id" bindtap="viewOrder" data-id="{{item._id}}">
+      <view class="oc-header">
+        <view class="oc-left">
+          <view class="oc-no">{{item.orderNo}}</view>
+          <view class="oc-customer">
+            <text>{{item.customerNickname || '未知顾客'}}</text>
+            <text wx:if="{{item.customerAddress}}"> · {{item.customerAddress}}</text>
+          </view>
+        </view>
+        <view class="oc-right">
+          <view class="badge badge-{{item.status}}">
+            {{item.status === 'pending' ? '待接单' : ''}}
+            {{item.status === 'accepted' ? '已接单' : ''}}
+            {{item.status === 'completed' ? '已完成' : ''}}
+          </view>
+          <view class="edited-tag" wx:if="{{item.isEdited}}">已调整</view>
+        </view>
+      </view>
+
+      <view class="oc-items">
+        <text wx:for="{{item.items}}" wx:for-item="di" wx:key="dishId" wx:if="{{index < 4}}">
+          {{di.name}}x{{di.quantity}}{{index < item.items.length - 1 && index < 3 ? '、' : ''}}
+        </text>
+        <text wx:if="{{item.items.length > 4}}">...共{{item.totalQuantity}}件</text>
+      </view>
+
+      <view class="oc-footer">
+        <view class="oc-time">{{item.createdAt}}</view>
+        <view class="oc-total">
+          <text>合计</text>
+          <text class="price">{{item.totalPrice}}</text>
+        </view>
+      </view>
+
+      <!-- 快捷接单按钮 -->
+      <view class="oc-quick-accept" wx:if="{{item.status === 'pending'}}" catchtap="quickAccept" data-id="{{item._id}}">
+        <text>一键接单</text>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{orders.length === 0 && loaded}}">
+      <text>暂无订单</text>
+    </view>
+
+    <view class="list-bottom" wx:if="{{orders.length > 0}}">
+      <text>—— {{currentTab === 'completed' ? '已全部显示' : '下拉刷新加载更多'}} ——</text>
+    </view>
+  </scroll-view>
+</view>

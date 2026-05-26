@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/menu/menu",
+    "pages/cart/cart",
+    "pages/my-orders/my-orders",
+    "pages/order-confirm/order-confirm",
+    "pages/order-success/order-success",
+    "pages/order-detail/order-detail",
+    "pages/dish-detail/dish-detail",
+    "pages/privacy/privacy",
+    "pages/merchant/login/login",
+    "pages/merchant/orders/orders",
+    "pages/merchant/order-detail/order-detail",
+    "pages/merchant/edit-order/edit-order",
+    "pages/merchant/accounting/accounting",
+    "pages/merchant/menu-manage/menu-manage"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#D4380D",
+    "navigationBarTitleText": "邓师烧烤",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#D4380D",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "菜单",
+        "iconPath": "images/tab-menu.png",
+        "selectedIconPath": "images/tab-menu-active.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "images/tab-cart.png",
+        "selectedIconPath": "images/tab-cart-active.png"
+      },
+      {
+        "pagePath": "pages/my-orders/my-orders",
+        "text": "我的",
+        "iconPath": "images/tab-mine.png",
+        "selectedIconPath": "images/tab-mine-active.png"
+      }
+    ]
+  },
+  "__usePrivacyCheck__": true,
+  "sitemapLocation": "sitemap.json"
+}

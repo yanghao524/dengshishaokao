@@ -1,0 +1,81 @@
+<!-- 首页 -->
+<view class="page">
+  <!-- 顶部品牌区 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <image class="logo" src="/images/dengshishaokao.png" mode="aspectFit" bindlongpress="onLogoLongPress"></image>
+      <view class="brand-name">邓师烧烤</view>
+      <view class="brand-desc">匠心烧烤 · 新鲜食材 · 秘制酱料</view>
+    </view>
+  </view>
+
+  <!-- 推荐菜品 -->
+  <view class="section" wx:if="{{featuredDishes.length > 0}}">
+    <view class="section-title">
+      <text class="title-icon">🔥</text>
+      <text>招牌推荐</text>
+    </view>
+    <scroll-view scroll-x class="featured-scroll" wx:if="{{menuLoaded}}">
+      <view class="featured-list">
+        <view class="featured-item" wx:for="{{featuredDishes}}" wx:key="_id" bindtap="goMenu">
+          <image class="featured-img" src="{{item.image || '/images/dish-placeholder.png'}}" mode="aspectFill"></image>
+          <view class="featured-info">
+            <view class="featured-name ellipsis">{{item.name}}</view>
+            <view class="featured-price">
+              <text class="price">{{item.price}}</text>
+              <text class="unit">/{{item.unit}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="loading-row" wx:else>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+
+  <!-- 开始点餐按钮 -->
+  <view class="action-area">
+    <button class="btn-start-order" bindtap="goMenu">
+      <text class="btn-icon">🍖</text>
+      <text>开始点餐</text>
+    </button>
+    <view class="action-links">
+      <view class="link-item" bindtap="goMyOrders">
+        <text class="link-icon">📋</text>
+        <text>我的订单</text>
+      </view>
+      <view class="link-item" bindtap="goMenu">
+        <text class="link-icon">📖</text>
+        <text>浏览菜单</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 商家入口提示 (隐藏，长按logo进入) -->
+  <view class="merchant-hint" wx:if="{{showMerchantHint}}">
+    <navigator url="/pages/merchant/login/login">商家管理入口 →</navigator>
+  </view>
+
+  <!-- 页脚 -->
+  <view class="footer">
+    <navigator url="/pages/privacy/privacy">隐私政策</navigator>
+  </view>
+</view>
+
+<!-- 隐私授权弹窗 -->
+<view class="privacy-popup" wx:if="{{showPrivacyPopup}}">
+  <view class="privacy-mask"></view>
+  <view class="privacy-dialog">
+    <view class="privacy-title">隐私政策提示</view>
+    <view class="privacy-content">
+      邓师烧烤非常重视您的隐私。我们仅会在您下单时收集必要的联系方式（称呼、手机号、地址），用于订单处理和商家联系。详细信息请查看
+      <navigator url="/pages/privacy/privacy" class="privacy-link">《隐私政策》</navigator>
+    </view>
+    <view class="privacy-btns">
+      <button class="privacy-btn-cancel" bindtap="onDisagreePrivacy">不同意</button>
+      <button class="privacy-btn-agree" bindtap="onAgreePrivacy">同意</button>
+    </view>
+  </view>
+</view>
