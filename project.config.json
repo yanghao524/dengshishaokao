@@ -21,8 +21,13 @@
     "compileHotReLoad": false,
     "lazyCodeLoading": "requiredComponents",
     "useMultiFrameRuntime": true,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./"
+      }
+    ],
     "minifyWXSS": true,
     "minifyWXML": true,
     "localPlugins": false,
@@ -32,5 +37,6 @@
   "libVersion": "3.6.0",
   "appid": "wx2d972b3b182ebe48",
   "projectname": "dengshi-bbq",
-  "condition": {}
+  "condition": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }

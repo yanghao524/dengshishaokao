@@ -3,13 +3,14 @@ const app = getApp();
 
 Page({
   data: {
-    cartSummary: cartUtil.getCartSummary(),
+    cartSummary: null,
     form: { nickname: '', phone: '', address: '' },
     remark: '',
     submitting: false
   },
 
   onLoad() {
+    this.refreshCart();
     // 预填已有信息
     const info = app.globalData.customerInfo;
     if (info) {
@@ -26,6 +27,14 @@ Page({
   onInput(e) {
     const { field } = e.currentTarget.dataset;
     this.setData({ [`form.${field}`]: e.detail.value });
+  },
+
+  onShow() {
+    this.refreshCart();
+  },
+
+  refreshCart() {
+    this.setData({ cartSummary: cartUtil.getCartSummary() });
   },
 
   onRemarkInput(e) {

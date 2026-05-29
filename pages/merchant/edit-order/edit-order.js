@@ -82,10 +82,6 @@ Page({
     this.recalc();
   },
 
-  onRemarkInput(e) {
-    this.setData({ remark: e.detail.value });
-  },
-
   // 菜品选择器
   showDishPicker() { this.setData({ showPicker: true }); },
   closePicker() { this.setData({ showPicker: false }); },
@@ -125,8 +121,7 @@ Page({
           items: this.data.items.map(item => ({
             dishId: item.dishId,
             quantity: item.quantity
-          })),
-          remark: this.data.remark
+          }))
         }
       });
       wx.hideLoading();

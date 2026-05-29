@@ -4,7 +4,7 @@
   <view class="header">
     <view class="header-bg"></view>
     <view class="header-content">
-      <image class="logo" src="/images/dengshishaokao.png" mode="aspectFit" bindlongpress="onLogoLongPress"></image>
+      <image class="logo" src="/images/dengshishaokao.png" mode="aspectFit"></image>
       <view class="brand-name">邓师烧烤</view>
       <view class="brand-desc">匠心烧烤 · 新鲜食材 · 秘制酱料</view>
     </view>
@@ -53,9 +53,13 @@
     </view>
   </view>
 
-  <!-- 商家入口提示 (隐藏，长按logo进入) -->
-  <view class="merchant-hint" wx:if="{{showMerchantHint}}">
-    <navigator url="/pages/merchant/login/login">商家管理入口 →</navigator>
+  <!-- 商家管理入口 -->
+  <view class="merchant-entry">
+    <navigator url="/pages/merchant/login/login" class="merchant-card">
+      <text class="merchant-icon">🏪</text>
+      <text class="merchant-text">商家管理</text>
+      <text class="merchant-arrow">→</text>
+    </navigator>
   </view>
 
   <!-- 页脚 -->
@@ -76,6 +80,36 @@
     <view class="privacy-btns">
       <button class="privacy-btn-cancel" bindtap="onDisagreePrivacy">不同意</button>
       <button class="privacy-btn-agree" bindtap="onAgreePrivacy">同意</button>
+    </view>
+  </view>
+</view>
+
+<!-- 微信用户授权弹窗 -->
+<view class="auth-popup" wx:if="{{showAuthPopup}}" catchtouchmove="{{true}}">
+  <view class="auth-mask"></view>
+  <view class="auth-dialog">
+    <view class="auth-title">
+      <text class="auth-title-icon">🔥</text>
+      <text>完善个人信息</text>
+    </view>
+    <view class="auth-subtitle">授权头像和昵称，享受更好的点餐体验</view>
+
+    <view class="auth-avatar-area">
+      <button class="auth-avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image class="auth-avatar-img" src="{{authAvatarUrl || '/images/dengshishaokao.png'}}" mode="aspectFill"></image>
+      </button>
+      <view class="auth-avatar-tip" wx:if="{{!authAvatarUrl}}">点击选择头像</view>
+      <view class="auth-avatar-tip" wx:else>点击更换头像</view>
+    </view>
+
+    <view class="auth-nickname-area">
+      <view class="auth-nickname-label">昵称</view>
+      <input class="auth-nickname-input" type="nickname" placeholder="点击获取微信昵称" value="{{authNickname}}" bindinput="onAuthNicknameInput" maxlength="20"/>
+    </view>
+
+    <view class="auth-btns">
+      <button class="auth-btn-skip" bindtap="onAuthSkip">跳过</button>
+      <button class="auth-btn-confirm" bindtap="onAuthConfirm">确认</button>
     </view>
   </view>
 </view>

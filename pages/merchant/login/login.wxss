@@ -60,3 +60,19 @@
 .btn-login[disabled] {
   opacity: 0.6;
 }
+.btn-back {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: #FFF7F3;
+  color: #B8603E;
+  border-radius: 44rpx;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  margin-top: 20rpx;
+  border: 2rpx solid #F0D8CA;
+}
+.btn-back::after {
+  border: none;
+}

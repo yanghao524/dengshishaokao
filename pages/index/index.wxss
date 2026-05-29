@@ -7,7 +7,7 @@
 /* 头部 */
 .header {
   position: relative;
-  height: 360rpx;
+  height: 500rpx;
   overflow: hidden;
 }
 .header-bg {
@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 60rpx;
+  padding-top: 140rpx;
   z-index: 1;
 }
 .logo {
@@ -152,18 +152,36 @@
 }
 
 /* 商家入口 */
-.merchant-hint {
-  text-align: center;
-  margin-top: 30rpx;
-  opacity: 0;
-  animation: fadeIn 0.5s 3s forwards;
+.merchant-entry {
+  display: flex;
+  justify-content: center;
+  margin-top: 32rpx;
+  padding: 0 20rpx;
 }
-@keyframes fadeIn {
-  to { opacity: 1; }
+.merchant-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80rpx;
+  background: #fff;
+  border-radius: 50rpx;
+  border: 2rpx dashed #E8C4B0;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
 }
-.merchant-hint navigator {
-  font-size: var(--font-xs);
-  color: var(--text-hint);
+.merchant-icon {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+}
+.merchant-text {
+  font-size: var(--font-sm);
+  color: #B8603E;
+  font-weight: 500;
+}
+.merchant-arrow {
+  font-size: var(--font-sm);
+  color: #CC9A80;
+  margin-left: 8rpx;
 }
 
 /* 页脚 */
@@ -235,6 +253,137 @@
   color: #fff;
   border-radius: 40rpx;
   font-size: var(--font-md);
+  border: none;
+}
+
+/* 授权弹窗 */
+.auth-popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9998;
+}
+.auth-mask {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+.auth-dialog {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 40rpx 32rpx;
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.auth-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+  display: flex;
+  align-items: center;
+}
+.auth-title-icon {
+  margin-right: 8rpx;
+  font-size: 36rpx;
+}
+.auth-subtitle {
+  font-size: var(--font-sm);
+  color: var(--text-hint);
+  margin-bottom: 36rpx;
+}
+
+/* 头像区域 */
+.auth-avatar-area {
+  margin-bottom: 32rpx;
+}
+.auth-avatar-btn {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 80rpx;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 4rpx dashed #E8C4B0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+  line-height: 1;
+}
+.auth-avatar-btn::after {
+  border: none;
+}
+.auth-avatar-img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 80rpx;
+  background: #FFF1E8;
+}
+.auth-avatar-tip {
+  font-size: var(--font-xs);
+  color: #B8603E;
+  margin-top: 16rpx;
+  white-space: nowrap;
+}
+
+/* 昵称区域 */
+.auth-nickname-area {
+  width: 100%;
+  margin-bottom: 36rpx;
+}
+.auth-nickname-label {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-bottom: 12rpx;
+}
+.auth-nickname-input {
+  width: 100%;
+  height: 80rpx;
+  background: var(--bg-page);
+  border-radius: var(--radius-sm);
+  padding: 0 24rpx;
+  font-size: var(--font-md);
+  box-sizing: border-box;
+}
+
+/* 授权按钮 */
+.auth-btns {
+  display: flex;
+  gap: 20rpx;
+  width: 100%;
+}
+.auth-btn-skip {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: #f5f5f5;
+  color: var(--text-secondary);
+  border-radius: 40rpx;
+  font-size: var(--font-md);
+  border: none;
+}
+.auth-btn-skip::after {
+  border: none;
+}
+.auth-btn-confirm {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #D4380D, #FF6B3D);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: var(--font-md);
+  font-weight: 600;
+  border: none;
+}
+.auth-btn-confirm::after {
   border: none;
 }
 

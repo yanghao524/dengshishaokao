@@ -21,6 +21,34 @@ exports.main = async (event, context) => {
       return { success: true, data: null };
     }
 
+    if (action === 'setupProfile') {
+      // 轻量级 profile 初始化（头像+昵称，无需手机号）
+      const { nickname, avatarUrl } = event;
+      const existing = await db.collection('customers').where({ _openid: OPENID }).get();
+      const now = new Date();
+
+      if (existing.data.length > 0) {
+        const updateData = { updatedAt: now };
+        if (nickname !== undefined) updateData.nickname = nickname;
+        if (avatarUrl !== undefined) updateData.avatarUrl = avatarUrl;
+        await db.collection('customers').doc(existing.data[0]._id).update({ data: updateData });
+        const updated = await db.collection('customers').doc(existing.data[0]._id).get();
+        return { success: true, data: updated.data };
+      }
+
+      const insertRes = await db.collection('customers').add({
+        data: {
+          _openid: OPENID,
+          nickname: nickname || '',
+          avatarUrl: avatarUrl || '',
+          createdAt: now,
+          updatedAt: now
+        }
+      });
+      const newCustomer = await db.collection('customers').doc(insertRes._id).get();
+      return { success: true, data: newCustomer.data };
+    }
+
     if (action === 'updateInfo') {
       // 注册或更新顾客信息
       if (!phone) {

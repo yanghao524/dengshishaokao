@@ -20,7 +20,10 @@ Page({
   },
 
   onShow() {
-    // 刷新购物车状态
+    if (app.globalData.silentLoginDone && app.globalData.needProfileSetup) {
+      wx.switchTab({ url: '/pages/index/index' });
+      return;
+    }
     this.refreshCartState();
   },
 

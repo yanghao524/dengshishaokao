@@ -1,11 +1,16 @@
 const cartUtil = require('../../utils/cart');
+const app = getApp();
 
 Page({
   data: {
-    cartSummary: cartUtil.getCartSummary()
+    cartSummary: null
   },
 
   onShow() {
+    if (app.globalData.silentLoginDone && app.globalData.needProfileSetup) {
+      wx.switchTab({ url: '/pages/index/index' });
+      return;
+    }
     this.setData({ cartSummary: cartUtil.getCartSummary() });
   },
 

@@ -28,10 +28,10 @@
       <text>+ 添加菜品</text>
     </view>
 
-    <!-- 备注 -->
-    <view class="remark-group">
-      <view class="remark-label">备注</view>
-      <textarea class="remark-input" placeholder="修改备注..." value="{{remark}}" bindinput="onRemarkInput" maxlength="200" auto-height/>
+    <!-- 备注（顾客留言，不可编辑） -->
+    <view class="remark-group" wx:if="{{remark}}">
+      <view class="remark-label">顾客备注</view>
+      <view class="remark-text">{{remark}}</view>
     </view>
 
     <!-- 总计 -->

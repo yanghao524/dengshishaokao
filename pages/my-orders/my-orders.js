@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   data: {
     currentTab: 'all',
@@ -9,6 +11,10 @@ Page({
   },
 
   onShow() {
+    if (app.globalData.silentLoginDone && app.globalData.needProfileSetup) {
+      wx.switchTab({ url: '/pages/index/index' });
+      return;
+    }
     this.setData({ page: 1, orders: [], hasMore: true });
     this.loadOrders();
   },
@@ -26,7 +32,7 @@ Page({
       const params = { page, pageSize };
 
       if (currentTab === 'pending') {
-        params.status = 'pending';
+        params.status = ['pending', 'accepted'];
       } else if (currentTab === 'completed') {
         params.status = 'completed';
       }

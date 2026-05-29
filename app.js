@@ -5,7 +5,9 @@ App({
     isMerchant: false,       // 是否商家模式
     merchantInfo: null,      // 商家登录信息
     menuCache: null,         // 菜单缓存 (分类+菜品)
-    menuCacheTime: 0         // 缓存时间戳
+    menuCacheTime: 0,        // 缓存时间戳
+    silentLoginDone: false,  // 静默登录是否完成
+    needProfileSetup: false  // 是否需要弹出授权弹窗
   },
 
   onLaunch() {
@@ -40,12 +42,48 @@ App({
         name: 'customerRegister',
         data: { action: 'silentLogin' }
       });
+      console.log('[auth] silentLogin result:', JSON.stringify(res.result));
       if (res.result && res.result.data) {
         this.globalData.customerInfo = res.result.data;
       }
     } catch (err) {
-      console.log('静默登录延迟:', err.message);
+      console.log('[auth] 静默登录延迟:', err.message);
+    } finally {
+      this.globalData.silentLoginDone = true;
+      this.checkNeedProfileSetup();
     }
+  },
+
+  // 检查是否需要弹出授权弹窗
+  checkNeedProfileSetup() {
+    const hasStorage = !!wx.getStorageSync('bbq_profile_setup_done');
+    const info = this.globalData.customerInfo;
+    console.log('[auth] checkNeedProfileSetup:', { hasStorage, hasInfo: !!info, nickname: info && info.nickname, avatarUrl: info && info.avatarUrl });
+    if (hasStorage) {
+      this.globalData.needProfileSetup = false;
+      return;
+    }
+    if (info && info.avatarUrl) {
+      wx.setStorageSync('bbq_profile_setup_done', true);
+      this.globalData.needProfileSetup = false;
+      return;
+    }
+    this.globalData.needProfileSetup = true;
+    console.log('[auth] needProfileSetup = true');
+  },
+
+  // 保存头像和昵称
+  async setupProfile(data) {
+    const res = await wx.cloud.callFunction({
+      name: 'customerRegister',
+      data: { action: 'setupProfile', ...data }
+    });
+    if (res.result && res.result.success && res.result.data) {
+      this.globalData.customerInfo = res.result.data;
+      this.globalData.needProfileSetup = false;
+      wx.setStorageSync('bbq_profile_setup_done', true);
+    }
+    return res.result;
   },
 
   // 顾客注册/更新信息
@@ -101,10 +139,10 @@ App({
   async getMenu(forceRefresh = false) {
     const now = Date.now();
     if (!forceRefresh && this.globalData.menuCache && (now - this.globalData.menuCacheTime < 300000)) {
-      return this.globalData.menuCache;
+      return { success: true, data: this.globalData.menuCache };
     }
     const res = await wx.cloud.callFunction({ name: 'getMenu' });
-    if (res.result && res.result.data) {
+    if (res.result && res.result.success) {
       this.globalData.menuCache = res.result.data;
       this.globalData.menuCacheTime = now;
     }

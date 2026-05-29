@@ -101,10 +101,13 @@
   color: var(--text-hint);
   margin-bottom: 8rpx;
 }
-.remark-input {
-  width: 100%;
-  min-height: 80rpx;
+.remark-text {
   font-size: var(--font-md);
+  color: var(--text-secondary);
+  padding: 12rpx 16rpx;
+  background: #fafafa;
+  border-radius: var(--radius-sm);
+  line-height: 1.6;
 }
 
 /* 总计 */

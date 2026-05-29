@@ -7,18 +7,19 @@ exports.main = async (event) => {
   const { OPENID } = cloud.getWXContext();
 
   try {
-    let query = db.collection('orders');
+    const _ = db.command;
+    const where = {};
 
-    // 商家查全部，顾客查自己的
-    if (role === 'merchant') {
-      // 商家权限由调用方自己保证 (前端隐藏+云函数校验可加token)
-    } else {
-      query = query.where({ _openid: OPENID });
+    // 顾客只能查自己的
+    if (role !== 'merchant') {
+      where._openid = OPENID;
     }
 
     if (status && status !== 'all') {
-      query = query.where({ status });
+      where.status = Array.isArray(status) ? _.in(status) : status;
     }
+
+    const query = db.collection('orders').where(where);
 
     const total = await query.count();
     const res = await query
